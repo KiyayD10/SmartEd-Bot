@@ -1,29 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import * as faqData from './dataset/faq.json';
+import { TFIDFCalculator } from './utils/tfidf';
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
 
 @Injectable()
 export class ChatbotService {
-  getAnswer(question: string) {
-    const lowerQuestion = question.toLowerCase();
+  private faqs: FAQ[];
+  private tfidfCalculator: TFIDFCalculator;
 
-    // Default jawaban
-    let answer = 'Maaf, saya belum mengerti pertanyaan itu.';
-    let score = 0.1;
+  constructor() {
+    // Load dataset FAQ dari file JSON
+    this.faqs = faqData as FAQ[];
 
-    // Logika sederhana (Rule-based)
-    if (lowerQuestion.includes('halo') || lowerQuestion.includes('hai')) {
-      answer = 'Halo! Ada yang bisa saya bantu mengenai pelajaran hari ini?';
-      score = 0.9;
-    } else if (lowerQuestion.includes('siapa kamu')) {
-      answer = 'Saya adalah SmartEd Bot, asisten pintar untuk membantumu belajar.';
-      score = 1.0;
-    } else if (lowerQuestion.includes('jam berapa')) {
-      answer = `Sekarang jam ${new Date().toLocaleTimeString('id-ID')}`;
-      score = 1.0;
-    }
+    // Inisialisasi TF-IDF Calculator dengan dataset
+    const documents = this.faqs.map(faq => faq.question);
+    this.tfidfCalculator = new TFIDFCalculator(documents);
 
-    return {
-      answer,
-      score,
-    };
+    console.log(`Loaded ${this.faqs.length} FAQ data`);
   }
 }
