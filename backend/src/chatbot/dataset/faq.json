@@ -1,0 +1,78 @@
+[
+  {
+    "question": "Apa itu chatbot informasi kampus?",
+    "answer": "Chatbot informasi kampus adalah sistem tanya jawab otomatis berbasis web yang membantu mahasiswa dan calon mahasiswa memperoleh informasi terkait kampus tanpa harus bertanya langsung ke admin. Sistem ini menggunakan metode TF-IDF untuk mencocokkan pertanyaan dan memberikan jawaban yang relevan."
+  },
+  {
+    "question": "Bagaimana cara kerja chatbot informasi kampus?",
+    "answer": "Chatbot bekerja dengan memproses pertanyaan pengguna, melakukan preprocessing teks, menghitung TF-IDF, dan membandingkan kemiripan pertanyaan dengan dataset menggunakan cosine similarity. Jawaban dengan bobot tertinggi akan ditampilkan."
+  },
+  {
+    "question": "Informasi apa saja yang bisa diberikan chatbot kampus?",
+    "answer": "Chatbot dapat memberikan informasi seperti profil kampus, program studi, biaya kuliah, pendaftaran mahasiswa baru, beasiswa, fasilitas kampus, layanan akademik, jadwal kuliah, administrasi keuangan, dan kontak penting kampus."
+  },
+  {
+    "question": "Apa itu TF-IDF dalam chatbot kampus?",
+    "answer": "TF-IDF adalah metode untuk menghitung bobot kata berdasarkan frekuensi kemunculan kata dalam suatu kalimat dan seberapa jarang kata tersebut pada seluruh dataset. TF-IDF digunakan untuk menilai pentingnya kata dalam pertanyaan pengguna."
+  },
+  {
+    "question": "Apa itu cosine similarity?",
+    "answer": "Cosine similarity adalah perhitungan kemiripan antara dua vektor. Dalam chatbot ini, nilai cosine similarity menentukan seberapa mirip pertanyaan pengguna dengan pertanyaan yang ada dalam dataset FAQ."
+  },
+  {
+    "question": "Bagaimana cara mendaftar sebagai mahasiswa baru?",
+    "answer": "Pendaftaran mahasiswa baru dapat dilakukan melalui website resmi kampus pada menu PMB. Calon mahasiswa harus mengisi formulir online, mengunggah berkas syarat pendaftaran, dan melakukan pembayaran biaya registrasi."
+  },
+  {
+    "question": "Apa saja program studi yang tersedia di kampus?",
+    "answer": "Program studi yang tersedia antara lain: Teknik Informatika, Sistem Informasi, Manajemen, Akuntansi, dan Pendidikan. Informasi lengkap dapat dilihat pada halaman program studi di website kampus."
+  },
+  {
+    "question": "Berapa biaya kuliah di kampus?",
+    "answer": "Biaya kuliah bervariasi per program studi. Rata-rata terdiri dari biaya registrasi, Uang Kuliah Tetap (UKT), dan biaya per SKS. Detail biaya dapat dilihat pada tabel biaya kuliah website kampus atau menghubungi bagian administrasi."
+  },
+  {
+    "question": "Apakah ada program beasiswa?",
+    "answer": "Ya, kampus menyediakan beberapa jenis beasiswa seperti beasiswa prestasi, beasiswa KIP-K, beasiswa yayasan, dan beasiswa mitra industri. Persyaratan dan jadwal pendaftaran dapat dilihat pada menu beasiswa."
+  },
+  {
+    "question": "Apa saja fasilitas di kampus?",
+    "answer": "Fasilitas kampus meliputi ruang kelas ber-AC, laboratorium komputer, perpustakaan, wifi kampus, ruang rapat, masjid, kantin, area parkir luas, dan ruang organisasi mahasiswa."
+  },
+  {
+    "question": "Bagaimana cara menghubungi pihak kampus?",
+    "answer": "Pengguna dapat menghubungi kampus melalui email resmi, nomor telepon administrasi, atau datang langsung ke kantor pelayanan akademik pada jam operasional."
+  },
+  {
+    "question": "Di mana lokasi kampus?",
+    "answer": "Kampus berlokasi di Jalan XYZ No. 123, Kota Bandar Lampung. Lokasi dapat ditelusuri melalui Google Maps dengan mengetikkan nama kampus."
+  },
+  {
+    "question": "Apa itu KRS?",
+    "answer": "KRS atau Kartu Rencana Studi adalah proses pengambilan mata kuliah untuk satu semester. Mahasiswa wajib mengisi KRS melalui sistem akademik online sebelum perkuliahan dimulai."
+  },
+  {
+    "question": "Bagaimana cara mengisi KRS?",
+    "answer": "Mahasiswa login ke sistem akademik online, memilih menu KRS, memilih mata kuliah sesuai semester atau hasil konsultasi dengan dosen wali, lalu menyimpan KRS sebelum batas waktu."
+  },
+  {
+    "question": "Bagaimana cara cek jadwal kuliah?",
+    "answer": "Jadwal kuliah dapat dilihat melalui sistem akademik online atau melalui pengumuman resmi di website kampus dan grup informasi mahasiswa."
+  },
+  {
+    "question": "Apa itu layanan akademik kampus?",
+    "answer": "Layanan akademik mencakup pembuatan KRS/KHS, transkrip nilai, surat keterangan aktif kuliah, cuti akademik, dan pengajuan sidang skripsi."
+  },
+  {
+    "question": "Apa saja syarat pendaftaran mahasiswa baru?",
+    "answer": "Syarat umum meliputi ijazah SMA/SMK sederajat, pas foto, kartu keluarga, KTP, dan bukti pembayaran registrasi. Beberapa prodi mungkin memiliki syarat tambahan."
+  },
+  {
+    "question": "Apakah chatbot ini bekerja secara otomatis?",
+    "answer": "Ya, chatbot bekerja otomatis tanpa operator manusia. Sistem akan mencocokkan pertanyaan dengan basis data FAQ menggunakan TF-IDF dan mengembalikan jawaban terbaik."
+  },
+  {
+    "question": "Apa keuntungan menggunakan chatbot informasi kampus?",
+    "answer": "Chatbot dapat melayani 24/7, mengurangi beban admin kampus, mempermudah akses informasi, meningkatkan pelayanan, dan memudahkan mahasiswa mendapatkan jawaban cepat tanpa antre."
+  }
+]
