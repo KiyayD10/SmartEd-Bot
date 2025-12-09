@@ -17,7 +17,7 @@ export class ChatbotService {
     this.faqs = faqData as FAQ[];
 
     // Inisialisasi TF-IDF Calculator dengan dataset
-    const documents = this.faqs.map(faq => faq.question);
+    const documents = this.faqs.map((faq) => faq.question);
     this.tfidfCalculator = new TFIDFCalculator(documents);
 
     console.log(`Loaded ${this.faqs.length} FAQ data`);
@@ -43,7 +43,8 @@ export class ChatbotService {
 
     if (maxScore < THRESHOLD) {
       return {
-        answer: 'Maaf, saya tidak memahami pertanyaan Anda. Bisakah Anda mengajukan pertanyaan lain?',
+        answer:
+          'Maaf, saya tidak memahami pertanyaan Anda. Bisakah Anda mengajukan pertanyaan lain?',
         score: 0,
       };
     }
