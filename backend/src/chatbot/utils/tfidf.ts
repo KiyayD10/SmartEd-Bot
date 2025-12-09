@@ -5,7 +5,7 @@ export class TFIDFCalculator {
   private idfScores: Map<string, number>;
   private documentVectors: number[][];
 
- // Stopwords bahasa Indonesia yang umum
+  // Stopwords bahasa Indonesia yang umum
   private stopwords = new Set([
     'yang', 'dan', 'di', 'ke', 'dari', 'untuk', 'pada', 'adalah', 'dengan',
     'ini', 'itu', 'dalam', 'tidak', 'ada', 'akan', 'telah', 'dapat', 'oleh',
@@ -21,11 +21,11 @@ export class TFIDFCalculator {
 
     // Proses semua dokumen dan hitung TF-IDF
     this.buildVocabulary();
-    // this.calculateIDF(); // (Di-comment dulu methodnya blm ada)
+    this.calculateIDF(); 
     // this.calculateDocumentVectors(); // (Di-comment dulu)
   }
 
- // Preprocessing teks
+  // Preprocessing teks
   private preprocess(text: string): string[] {
     const lowercased = text.toLowerCase();
 
@@ -39,7 +39,7 @@ export class TFIDFCalculator {
     return filtered;
   }
 
- // Membangun vocabulary dari semua dokumen
+  // Membangun vocabulary dari semua dokumen
   private buildVocabulary(): void {
     const vocabSet = new Set<string>();
 
@@ -49,5 +49,42 @@ export class TFIDFCalculator {
     }
 
     this.vocabulary = Array.from(vocabSet);
+  }
+
+  //  Menghitung Term Frequency untuk sebuah dokumen
+  private calculateTF(tokens: string[]): Map<string, number> {
+    const tf = new Map<string, number>();
+    const totalTokens = tokens.length;
+
+    if (totalTokens === 0) return tf;
+
+    for (const token of tokens) {
+      tf.set(token, (tf.get(token) || 0) + 1);
+    }
+
+    for (const [term, freq] of tf.entries()) {
+      tf.set(term, freq / totalTokens);
+    }
+
+    return tf;
+  }
+
+  //  Menghitung Inverse Document Frequency untuk semua term
+  private calculateIDF(): void {
+    const N = this.documents.length;
+
+    for (const term of this.vocabulary) {
+      let documentFrequency = 0;
+
+      for (const doc of this.documents) {
+        const tokens = this.preprocess(doc);
+        if (tokens.includes(term)) {
+          documentFrequency++;
+        }
+      }
+
+      const idf = Math.log(N / (documentFrequency + 1)) + 1;
+      this.idfScores.set(term, idf);
+    }
   }
 }
