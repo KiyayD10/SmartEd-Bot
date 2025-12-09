@@ -7,10 +7,41 @@ export class TFIDFCalculator {
 
   // Stopwords bahasa Indonesia yang umum
   private stopwords = new Set([
-    'yang', 'dan', 'di', 'ke', 'dari', 'untuk', 'pada', 'adalah', 'dengan',
-    'ini', 'itu', 'dalam', 'tidak', 'ada', 'akan', 'telah', 'dapat', 'oleh',
-    'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'bagaimana', 'atau', 'juga',
-    'saya', 'kamu', 'dia', 'kita', 'mereka', 'ya', 'sudah', 'bisa', 'harus',
+    'yang',
+    'dan',
+    'di',
+    'ke',
+    'dari',
+    'untuk',
+    'pada',
+    'adalah',
+    'dengan',
+    'ini',
+    'itu',
+    'dalam',
+    'tidak',
+    'ada',
+    'akan',
+    'telah',
+    'dapat',
+    'oleh',
+    'apa',
+    'siapa',
+    'kapan',
+    'dimana',
+    'mengapa',
+    'bagaimana',
+    'atau',
+    'juga',
+    'saya',
+    'kamu',
+    'dia',
+    'kita',
+    'mereka',
+    'ya',
+    'sudah',
+    'bisa',
+    'harus',
   ]);
 
   constructor(documents: string[]) {
@@ -21,8 +52,8 @@ export class TFIDFCalculator {
 
     // Proses semua dokumen dan hitung TF-IDF
     this.buildVocabulary();
-    this.calculateIDF(); 
-    // this.calculateDocumentVectors(); // (Di-comment dulu)
+    this.calculateIDF();
+    this.calculateDocumentVectors();
   }
 
   // Preprocessing teks
@@ -32,9 +63,9 @@ export class TFIDFCalculator {
     const tokens = lowercased
       .replace(/[^a-z0-9\s]/g, ' ')
       .split(/\s+/)
-      .filter(token => token.length > 0);
+      .filter((token) => token.length > 0);
 
-    const filtered = tokens.filter(token => !this.stopwords.has(token));
+    const filtered = tokens.filter((token) => !this.stopwords.has(token));
 
     return filtered;
   }
@@ -45,7 +76,7 @@ export class TFIDFCalculator {
 
     for (const doc of this.documents) {
       const tokens = this.preprocess(doc);
-      tokens.forEach(token => vocabSet.add(token));
+      tokens.forEach((token) => vocabSet.add(token));
     }
 
     this.vocabulary = Array.from(vocabSet);
@@ -86,5 +117,68 @@ export class TFIDFCalculator {
       const idf = Math.log(N / (documentFrequency + 1)) + 1;
       this.idfScores.set(term, idf);
     }
+  }
+
+  //  Menghitung TF-IDF vector untuk sebuah dokumen
+  private calculateTFIDFVector(text: string): number[] {
+    const tokens = this.preprocess(text);
+    const tf = this.calculateTF(tokens);
+    const vector: number[] = [];
+
+    for (const term of this.vocabulary) {
+      const tfValue = tf.get(term) || 0;
+      const idfValue = this.idfScores.get(term) || 0;
+      const tfidf = tfValue * idfValue;
+      vector.push(tfidf);
+    }
+
+    return vector;
+  }
+
+  //  Menghitung vector untuk semua dokumen dalam dataset
+  private calculateDocumentVectors(): void {
+    for (const doc of this.documents) {
+      const vector = this.calculateTFIDFVector(doc);
+      this.documentVectors.push(vector);
+    }
+  }
+
+  //  Menghitung cosine similarity antara dua vector
+  private cosineSimilarity(vectorA: number[], vectorB: number[]): number {
+    if (vectorA.length !== vectorB.length) {
+      throw new Error('Vector dimensions must match');
+    }
+
+    let dotProduct = 0;
+    let magnitudeA = 0;
+    let magnitudeB = 0;
+
+    for (let i = 0; i < vectorA.length; i++) {
+      dotProduct += vectorA[i] * vectorB[i];
+      magnitudeA += vectorA[i] * vectorA[i];
+      magnitudeB += vectorB[i] * vectorB[i];
+    }
+
+    magnitudeA = Math.sqrt(magnitudeA);
+    magnitudeB = Math.sqrt(magnitudeB);
+
+    if (magnitudeA === 0 || magnitudeB === 0) {
+      return 0;
+    }
+
+    return dotProduct / (magnitudeA * magnitudeB);
+  }
+
+  //  Menghitung similarity score antara query dengan semua dokumen
+  getSimilarityScores(query: string): number[] {
+    const queryVector = this.calculateTFIDFVector(query);
+    const scores: number[] = [];
+
+    for (const docVector of this.documentVectors) {
+      const similarity = this.cosineSimilarity(queryVector, docVector);
+      scores.push(similarity);
+    }
+
+    return scores;
   }
 }
