@@ -6,26 +6,18 @@ export class ChatbotController {
   constructor(private readonly chatbotService: ChatbotService) {}
 
   @Post('ask')
-  async askQuestion(@Body('question') question: string) {
+  askQuestion(@Body('question') question: string) {
     if (!question || question.trim() === '') {
       throw new BadRequestException('Pertanyaan tidak boleh kosong');
     }
 
-    try {
-      const answer = await this.chatbotService.getAnswer(question);
+    const answer = this.chatbotService.getAnswer(question);
 
-      return {
-        success: true,
-        question,
-        answer: answer.answer,
-        confidence: answer.score,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        message: 'Terjadi kesalahan saat memproses pertanyaan',
-        error: error.message,
-      };
-    }
+    return {
+      success: true,
+      question,
+      answer: answer.answer,
+      confidence: answer.score,
+    };
   }
 }
