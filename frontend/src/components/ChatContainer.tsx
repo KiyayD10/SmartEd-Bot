@@ -37,6 +37,21 @@ export default function ChatContainer({ messages, isLoading }: ChatContainerProp
                 <ChatMessage key={message.id} message={message} />
             ))}
             {isLoading && <TypingIndicator />}
+
+            {/* State kosong */}
+            {messages.length === 0 && !isLoading && (
+                <div className="flex items-center justify-center h-full">
+                    <div className="text-center space-y-4">
+                        <div className="text-6xl mb-4 animate-bounce">🤖</div>
+                        <h2 className="text-xl font-semibold text-white/90">
+                            Selamat Datang di TF-IDF Chatbot
+                        </h2>
+                        <p className="text-white/60 max-w-md">
+                            Ajukan pertanyaan Anda dan saya akan memberikan jawaban terbaik menggunakan algoritma TF-IDF
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
