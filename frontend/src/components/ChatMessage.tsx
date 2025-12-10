@@ -29,21 +29,36 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                                 minute: '2-digit' 
                             })}
                         </span>
-                        <span className="text-xs text-white/50">
-                            {message.timestamp.toLocaleDateString('id-ID', { 
-                                day: 'numeric', 
-                                month: 'long', 
-                                year: 'numeric' 
-                            })}
-                        </span>
                     </div>
                 </div>
             </div>
         );
     }
 
-    // Placeholder buat Bot (bakal kita update di step 2)
+    // Logic tampilan pesan BOT (Kiri) - UPDATED
     return (
-        <div className="text-white">Bot: {text}</div>
+        <div className="flex justify-start animate-slide-up">
+            <div className="max-w-[85%] group">
+                <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <span className="text-sm">🤖</span>
+                    </div>
+                    <div className="flex-1">
+                        <div className="glass-effect text-white px-5 py-3 rounded-2xl rounded-tl-sm shadow-xl">
+                            <p className="text-sm leading-relaxed">{text}</p>
+                        </div>
+                        <div className="flex items-center gap-2 mt-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span className="text-xs text-white/50">
+                                {message.timestamp.toLocaleTimeString('id-ID', { 
+                                    hour: '2-digit', 
+                                    minute: '2-digit' 
+                                })}
+                            </span>
+                            <span className="text-xs text-white/40">• Bot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
