@@ -1,21 +1,90 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import ChatContainer from '@/components/ChatContainer';
 import ChatInput from '@/components/ChatInput';
 
-export default function Home() {
-  const messages = [
-    {
-      id: '1',
-      text: 'Halo! Ini tampilan awal Chatbot.',
-      isUser: false,
-      timestamp: new Date(),
-    }
-  ];
-  const isLoading = false;
+interface Message {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+}
 
-  const handleSendMessage = (text: string) => {
-    console.log('User ngetik:', text);
+export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Welcome message saat pertama load
+  useEffect(() => {
+    const welcomeMessages: Message[] = [
+      {
+        id: '1',
+        text: "Halo! Saya chatbot berbasis TF-IDF. Saya siap menjawab pertanyaan Anda tentang kampus.",
+        isUser: false,
+        timestamp: new Date(),
+      },
+      {
+        id: '2',
+        text: "Saya menggunakan algoritma TF-IDF untuk memahami pertanyaan Anda dan memberikan jawaban yang paling relevan. Silakan ajukan pertanyaan!",
+        isUser: false,
+        timestamp: new Date(),
+      },
+    ];
+    
+    setMessages(welcomeMessages);
+  }, []);
+
+  const handleSendMessage = async (text: string) => {
+    // Tambahkan pesan user
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      isUser: true,
+      timestamp: new Date(),
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      // Kirim request ke backend
+      const response = await fetch('http://localhost:3000/chatbot/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: text }),
+      });
+
+      const data = await response.json();
+
+      // Simulasi delay untuk efek natural
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Tambahkan jawaban bot
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: data.success ? data.answer : "Maaf, terjadi kesalahan pada server",
+        isUser: false,
+        timestamp: new Date(),
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error:', error);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "Tidak dapat terhubung ke server",
+        isUser: false,
+        timestamp: new Date(),
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -40,20 +109,15 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Status indicator */}
           <div className="absolute top-6 right-8 flex items-center gap-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span className="text-xs text-white/80">Online</span>
           </div>
         </div>
 
-        {/* Chat Container */}
         <ChatContainer messages={messages} isLoading={isLoading} />
-
-        {/* Input Area */}
         <ChatInput onSend={handleSendMessage} disabled={isLoading} />
 
-        {/* Footer */}
         <div className="px-6 py-3 bg-white/5 border-t border-white/10">
           <p className="text-xs text-white/60 text-center">
             💡 <span className="text-white/80">Tip:</span> Tanya tentang "TF-IDF", "NestJS", "Cosine Similarity", atau topik NLP lainnya
