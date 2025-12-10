@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as faqData from './dataset/faq.json';
+import faqData from './dataset/faq.json';
 import { TFIDFCalculator } from './utils/tfidf';
 
 interface FAQ {
