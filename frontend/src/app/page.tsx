@@ -120,7 +120,7 @@ export default function Home() {
 
         <div className="px-6 py-3 bg-white/5 border-t border-white/10">
           <p className="text-xs text-white/60 text-center">
-            💡 <span className="text-white/80">Tip:</span> Tanya tentang "TF-IDF", "NestJS", "Cosine Similarity", atau topik NLP lainnya
+            💡 <span className="text-white/80">Tip:</span> Tanya tentang informasi kampus, TF-IDF, atau cara kerja chatbot.
           </p>
         </div>
       </div>
