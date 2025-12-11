@@ -49,7 +49,7 @@ export default function Home() {
 
     try {
       // Kirim request ke backend
-      const response = await fetch('http://localhost:3000/chatbot/ask', {
+      const response = await fetch('http://localhost:3001/chatbot/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,8 +104,8 @@ export default function Home() {
               🤖
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">TF-IDF Chatbot</h1>
-              <p className="text-sm text-white/80">Powered by NestJS & AI</p>
+              <h1 className="text-2xl font-bold text-white">SmartEd-Bot</h1>
+              <p className="text-sm text-white/80">Project Sederhana Dibuat Oleh: Robani Diansyah</p>
             </div>
           </div>
           

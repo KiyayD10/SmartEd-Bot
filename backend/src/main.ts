@@ -11,7 +11,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  await app.listen(3000);
-  console.log('Backend NestJS berjalan di http://localhost:3000');
+  await app.listen(3001);
+  console.log('Backend NestJS berjalan di http://localhost:3001');
 }
 void bootstrap();

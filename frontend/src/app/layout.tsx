@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TF-IDF Chatbot | AI-Powered Q&A",
+  title: "SmartEd-Bot",
   description: "Chatbot modern yang menggunakan algoritma TF-IDF untuk menjawab pertanyaan secara cerdas",
 };
 

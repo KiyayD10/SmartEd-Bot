@@ -74,5 +74,9 @@
   {
     "question": "Apa keuntungan menggunakan chatbot informasi kampus?",
     "answer": "Chatbot dapat melayani 24/7, mengurangi beban admin kampus, mempermudah akses informasi, meningkatkan pelayanan, dan memudahkan mahasiswa mendapatkan jawaban cepat tanpa antre."
+  },
+  {
+    "question": "Jam operasional kampus?",
+    "answer": "Jam operasional kampus dimulai dari pukul 06.00 sampai 22.00, namun layanan tertentu seperti perpustakaan atau administrasi bisa memiliki jadwal berbeda."
   }
 ]
