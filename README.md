@@ -57,30 +57,39 @@ npm run dev
 
 ### 2. Struktur Folder
 ```bash
-smarted-bot/
-├── backend/                # Aplikasi NestJS
+SmartEd-Bot/
+├── backend/                          # Backend NestJS
 │   ├── src/
-│   │   ├── app.controller.ts
-│   │   ├── app.service.ts  # Logika TF-IDF ada di sini
-│   │   └── main.ts         # Entry point (Port 3001)
-│   └── package.json
+│   │   ├── chatbot/
+│   │   │   ├── chatbot.controller.ts  # HTTP endpoints
+│   │   │   ├── chatbot.service.ts     # Logic bisnis
+│   │   │   ├── chatbot.module.ts      # Module NestJS
+│   │   │   ├── dataset/
+│   │   │   │   └── faq.json           # Data FAQ (25 Q&A)
+│   │   │   └── utils/
+│   │   │       └── tfidf.ts           # Algoritma TF-IDF
+│   │   ├── app.module.ts              # Root module
+│   │   └── main.ts                    # File utama
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .eslintrc.js
 │
-├── frontend/               # Aplikasi Next.js
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── globals.css # Import Tailwind v4
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx    # Halaman Utama Chat
-│   │   │   ├── api/        # (Opsional jika ada route handler)
-│   │   ├── components/
-│   │   │   ├── ChatContainer.tsx
-│   │   │   ├── ChatInput.tsx
-│   │   │   ├── ChatMessage.tsx
-│   │   │   └── TypingIndicator.tsx
-│   │   └── types.d.ts      # Deklarasi TypeScript
-│   └── package.json
-│
-└── README.md
+└── frontend-nextjs/                  # Frontend NextJS
+    ├── src/
+    │   ├── app/
+    │   │   ├── layout.tsx            # Layout utama
+    │   │   ├── page.tsx              # Halaman utama
+    │   │   └── globals.css           # Style global + Tailwind
+    │   └── components/
+    │       ├── ChatContainer.tsx     # Area chat
+    │       ├── ChatMessage.tsx       # Bubble message
+    │       ├── ChatInput.tsx         # Input field
+    │       └── TypingIndicator.tsx   # Animasi loading
+    ├── package.json
+    ├── tsconfig.json
+    ├── tailwind.config.ts
+    ├── postcss.config.js
+    └── next.config.js
 ```
 
 ## 🐛 Masalah Umum (Troubleshooting)
