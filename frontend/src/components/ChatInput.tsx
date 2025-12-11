@@ -69,10 +69,26 @@ export default function ChatInput({ onSend, disabled = false }: ChatInputProps) 
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>
                     )}
-
-                    {/* Ripple effect */}
                     <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
-                </button>
+                </button>   
+            </div>
+            <div className="flex items-center gap-2 mt-3 overflow-x-auto scrollbar-thin pb-1">
+                {[
+                    'Jadwal kuliah hari ini apa aja?',
+                    'Cara daftar ulang gimana?',
+                    'Lokasi ruang administrasi di mana?',
+                    'Cara lihat nilai semester?',
+                    'Jam operasional kampus?'
+                ].map((suggestion, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => !disabled && onSend(suggestion)}
+                        disabled={disabled}
+                        className="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-white/70 hover:text-white whitespace-nowrap transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {suggestion}
+                    </button>
+                ))}
             </div>
         </div>
     );
