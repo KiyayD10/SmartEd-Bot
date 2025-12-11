@@ -35,7 +35,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         );
     }
 
-    // Logic tampilan pesan BOT (Kiri) - UPDATED
+    // Logic tampilan pesan BOT (Kiri)
     return (
         <div className="flex justify-start animate-slide-up">
             <div className="max-w-[85%] group">
