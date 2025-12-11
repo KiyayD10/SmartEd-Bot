@@ -40,7 +40,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div className="flex justify-start animate-slide-up">
             <div className="max-w-[85%] group">
                 <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-purple-500 to-blue-500 flex items-center justify-center shrink-0 shadow-lg">
                         <span className="text-sm">🤖</span>
                     </div>
                     <div className="flex-1">
